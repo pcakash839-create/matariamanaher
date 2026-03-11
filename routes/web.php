@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('users', NewUserController::class);
     Route::resource('materials', MaterialController::class);
+    Route::get('get-materials/{id}', [MaterialController::class, 'getMaterials']);
     Route::get('inward/create',
         [InwardOutwardController::class,'create']
     )->name('inward.create');
