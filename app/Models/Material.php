@@ -9,7 +9,7 @@ class Material extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['category_id','name','opening_balance'];
+    protected $fillable = ['category_id', 'name', 'opening_balance'];
 
     public function category()
     {
@@ -19,5 +19,12 @@ class Material extends Model
     public function inwardOutwards()
     {
         return $this->hasMany(InwardOutward::class);
+    }
+
+    public function getCurrentBalanceAttribute()
+    {
+        $transactions = $this->inwardOutwards()->sum('quantity');
+
+        return $this->opening_balance + $transactions;
     }
 }
