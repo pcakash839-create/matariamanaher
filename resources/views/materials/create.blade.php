@@ -1,34 +1,56 @@
 @extends('adminlte::page')
 
-@section('title','Create User')
+@section('title','Create Material')
 
 @section('content_header')
-<h1>Create User</h1>
+<h1>Create Material</h1>
 @stop
 
 @section('content')
 
-<form method="POST" action="{{ route('users.store') }}">
+<form action="{{route('materials.store')}}"
+method="POST">
 
 @csrf
 
 <div class="form-group">
-<label>Name</label>
-<input type="text" name="name" class="form-control">
+<label>Category</label>
+
+<select name="category_id"
+class="form-control">
+
+@foreach($categories as $cat)
+
+<option value="{{$cat->id}}">
+
+{{$cat->name}}
+
+</option>
+
+@endforeach
+
+</select>
 </div>
 
 <div class="form-group">
-<label>Email</label>
-<input type="email" name="email" class="form-control">
+<label>Material Name</label>
+
+<input type="text"
+name="name"
+class="form-control">
 </div>
 
 <div class="form-group">
-<label>Password</label>
-<input type="password" name="password" class="form-control">
+<label>Opening Balance</label>
+
+<input type="number"
+step="0.01"
+name="opening_balance"
+class="form-control">
 </div>
 
-<button class="btn btn-success">
-Create User
+<button class="btn btn-success mt-2">
+Update
 </button>
 
 </form>
